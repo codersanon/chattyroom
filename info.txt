@@ -1,0 +1,146 @@
+Contributors
+- Hunter Brust (buckybrust)
+- KorinTariko
+- James
+- Elmas Mehmedagic
+- Jason
+
+
+Todo Goals
+	..Function Todo..
+    Add Deleting Individual Messages (Admin Can Delete Everyones)
+    Refresh Messages For The Deleted Messages
+	Add The Ability To Delete Your Own Messages
+    Add The Ability To Have Separate Rooms Or Channels
+    Perhaps Allowing Creating New Rooms In The App For The Admin
+    Add In Remote Updates(Push Out Updates Automatically)
+    
+    
+	..Design Todo..
+	get an ico for tab
+	Make Site Responsive
+	
+	
+	..Advanced Todo..
+	Add In Authentication
+	Add Profile Pictures
+    
+    
+    ..Firebase Todo..
+    Investigate Indexes and Rules
+    secure the database using them
+	Use Firebase Rules To Prevent Javascript From Being inserted Into Messages (<script> tags)
+	Use Firebase Transactions To Delete All Messages At The Same Time
+    Database Should Auto Reorganize Messages (If Their Is No Number 10 Message but their are messages below and above it will shift all messages above number 10 down 1 and fix total messages number.)
+    
+    
+    ..Analytics Todo..
+    Figure Out How I Want To Track A Login List Of People
+    Figure Out Way To Limit Messages And Still Be Able To Load More
+	Investigate Whether Non-Existant Messages Take Up The 50 Message Limit On Initial Loadup. (Do The Empty IDs Take Up the Place Of Messages?)
+	Investigate Whether Failing To Find A Document in The Database Still Counts As A Read (Unlikely)
+	
+	..Bugfixing Todo..
+    Fix the page not Loading Your Message After You Send it until someone else sends one. (refresh every 2 seconds?)
+	Fix Sometimes Downloading a Message Twice
+	Fix Hitting Enter Starts New Line Before Sending Message (This Accidentally Splits Messages Up If Cursor Is Between Words And Allows People To Send Blanks)
+	Fix Whenever A Message Is Added Or Deleted The Deleted Message Boxes Reappear And Then Dissappear Again.
+
+Development Updates
+	10/1/19
+		Added The Ability To Delete Messages You Wrote Or Any Indivually If You Are An Admin
+		Fixed A Glitch Were If A Message Was Missing In Database No Messages Would Load
+		Started To Add a Animation For The Deleted Messages
+
+	9/29/19
+		Chatty Clicker Added Scrolling Message Animation
+		Chatty Clicker Added Additional Upgrades
+		Chatty Clicker Added MPS Counter
+		Chatty Clicker Added Save and Load Functions
+		Chatty Clicker Added Reset Function
+		Fixed Messages Downloading Before Login
+
+    9/27/19
+        Easter Egg Clicker Added
+        Easter Egg Clicker Adjusts To Themes
+        Much Bug Fixing of Easter Egg Clicker
+
+    9/25/19
+        Fixed Messages Not Showing Up As Yours Or Others Showing Up As Yours
+        Increased Themes Size
+        
+	9/22/19
+		Themes Are Better
+		Fixed Many Bugs
+		Added Windows XP Theme
+		Added And Redesigned Emojis
+		Changed When You First Enter So It Only Starts You With The last 50 Messages
+		Fixed Clicking Enter Anywhere To Submit Message
+		Prevented Spamming And Repeating The Same Messages Locally
+		Fixed Messages Not Updating After Deletion Of All Messages
+		Added Rethought And Removed Herobrine
+		
+
+	9/11/19
+		Redid The Downloading of Messages To Be Infinitely More Efficient in Reads.
+		Added Additional Themes
+		Added Admin List
+		Reorganized Code With New Theme.js File
+		Removed Old LAME Code
+		Fixed More Theme Color Bugs
+		Added a Confirm Box To The Clear All Messages Button.
+		Removed Herobrine
+
+	9/9/19
+		Added Theme Menu
+		Made Browser Save Last Used Theme
+		Fixed Incorrect Theme Colors Issue
+		Increased Message Width To Fit Size of Screen
+
+	9/6/19
+		Added Theme Button
+		Created Easy Theme Creation (one long line of code)
+		Created Dark Theme
+		Improved Transitions (Buttons Grow When Hovered Over)
+	
+    9/5/19
+        Added Transparent Enter Message Box Unless Hover
+        Moved Buttons To Top Left
+        Added Resize Chatroom Button
+        Added Enter To Submit Unless ENTER + SHIFT
+    
+    8/21/19
+        Added Smooth Scrolling
+    
+    8/20/19
+        Added Scroll Down Button
+        Fixed Admin Scroll Bug
+        Fixed Time Showing Improperly
+        Added a Message Cap
+        Temporarily Disabled User Validation
+
+    7/20/19
+		Improved Style Of Message Area
+		Improved Style Of Input Area
+		Fixed Misc. Bugs
+		Added A Delete All Messages Admin Command
+		Added Message Validation
+		Added Scroll Height Checking And Matching (Stay The Same Scroll Height Even If New Messages Come In Unless They are at the very bottom)
+        
+    7/19/19
+		Added Auto Upload Messages To Firebase
+		Added Messages Automaticly Generating From Firebase On Snapshot
+		Made Login Case Friendly (Lower/Upper)
+		Allowed Chatroom To Sort Your Texts Separatly Identified By Your Username
+        
+	7/14/19
+		Finished Message Creation
+		Added A Time String Creator Function
+		Added In Firebase Support
+		Created A Userlist In Firestore
+		Had It Remove Users Who Leave The Site
+		
+	
+	
+	
+		

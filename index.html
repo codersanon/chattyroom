@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang='en'>
+<!--Name: Hunter Brust
+    Date: 5/31/19
+    Simple Chatroom Website-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <!--Shortcut Icon(Tab Icon)-->
+    <link rel="shortcut icon" href="pics/favicon.png">
+
+    <!-- Title Goes Here -->
+    <title id="titletag">The Chatty Room</title>
+
+	<!-- Title Goes Here -->
+	<title>The Efficient Chatty Room</title>
+	
+	<style id="themestyle"></style>
+    <style id="gamestyle"></style>
+
+</head>
+
+<body onunload="removeUser();" id="body">
+	<h1 id="head">The Efficient <span style="cursor:pointer;transition: none 120ms" onclick="checkGame();">C</span>hatty Room</h1>
+	<div id="logincover" style="width:100%;height:100%;position: absolute;top:0px;left:0px; opacity: 0.7;z-index:1;"></div>
+	<div id="login" style="">
+		<h2 id="themeheader" style="text-align: center;font-size:35px;margin-top:10px;font-family:sans-serif;">Login</h2>
+        <br>
+        <div>
+            <input type="text" id="username" required>
+            <label id="lblusername">Username</label>
+        </div>
+        <div onclick="login();" class="button" style="position: static;margin:auto;margin-top:120px;">Create Username</div>
+        
+        
+	</div>
+
+	<main id="main">
+		<div id="messagearea"></div>
+		<p style="visibility:hidden; clear:both;">.</p>
+
+	</main>
+	<div id="buttondiv">
+		<div id="scroll" class="button" onclick="scrollBottom();" style="top:0px;">Scroll Down</div>
+		<div id="scroll1" class="button" onclick="ResizeChat();" style="top:50px">Resize Chat</div>
+		<div id="scroll2" class="button" onclick="OpenThemeMenu();" style="top:100px; white-space: nowrap;">Change Theme</div>
+	</div>
+	<div id="inputarea">
+		<!--<input type="text" placeholder="Enter Text Here" id="input">-->
+		<footer id="footer">
+			<textarea placeholder="Enter Text Here" id="input"></textarea>
+			<div type="button" onclick="sendMessage();" value="Send Message" id="inputbutton"></div>
+		</footer>
+	</div>
+	
+	<!-- Sounds Links-->
+	<audio id='winstart'><source src='pics/sounds/winstartsound.mp3' type='audio/mpeg'></audio>
+	
+	
+	
+	<!-- Links to All The Scripts -->
+	<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+	<script src="javascript/setup.js"></script>
+	<script src="javascript/main.js"></script>
+	<script src="javascript/loginout.js"></script>
+	<script src="javascript/admin.js"></script>
+    <script src="javascript/themes.js"></script>
+	<script src="javascript/clicker.js"></script>
+	<script>
+		function ask() {
+			return "Do you really want to leave our brilliant application?";
+			//if we return nothing here (just calling return;) then there will be no pop-up question at all
+			//return;
+		};
+
+    </script>
+</body>
+
+</html>
