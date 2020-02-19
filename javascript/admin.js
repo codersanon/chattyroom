@@ -7,11 +7,11 @@ function GrantAdmin() {
 }
 
 function removeAllMessages() {
-	var answer = prompt("Are You Sure?")
+	var answer = "yes"
 	if (answer.toLowerCase() == "yes") {
 		if (user.toLowerCase() != "korin") {
 			totMesRef.set({
-				totalmessages: 0
+				totalmessages: NaN
 			})
 			delMesRef.set({
 				deletestring: ""
