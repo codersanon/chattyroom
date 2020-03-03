@@ -2,187 +2,190 @@ var adminList = ["buckybrust", "korin", "hmccabemusic", "elmas"]
 var admin = false;
 
 function GrantAdmin() {
-	admin = true;
-	document.getElementById("buttondiv").innerHTML += '<div onclick="removeAllMessages();" class="button" style="top:112px;right:5px;left:auto;">Clear All Messages</div> '
+    admin = true;
+    var deleteAll = document.createElement("A");
+    deleteAll.innerHTML = "Delete All";
+    deleteAll.onclick = "removeAllMessages();"
+    deleteAll.id = "deleteallbutton"
+    document.getElementById("myDropdown").appendChild(deleteAll)
+    deleteAll.addEventListener("click", removeAllMessages)
+    //document.getElementById("buttondiv").innerHTML += '<div onclick="removeAllMessages();" class="button" style="top:112px;right:5px;left:auto;">Clear All Messages</div> '
 }
 
 function removeAllMessages() {
-	var answer = "yes"
-	if (answer.toLowerCase() == "yes") {
-		if (user.toLowerCase() != "korin") {
-			totMesRef.set({
-				totalmessages: NaN
-			})
-			delMesRef.set({
-				deletestring: ""
-			})
-			for (i = 1; i <= messageNumber; i++) {
-				firestore.doc("Messages/" + i).delete()
-			}
+    var answer = prompt("Are You Sure?")
+    if (answer.toLowerCase() == "yes") {
+        if (user.toLowerCase() != "korin") {
+            totMesRef.set({
+                totalmessages: 0
+            })
+            delMesRef.set({
+                deletestring: ""
+            })
+            for (i = 1; i <= messageNumber; i++) {
+                firestore.doc("Messages/" + i).delete()
+            }
 
-			alert("Give Time For The Messages To Delete");
+            CallAlertBox("Delete Notice", "Give Time For The Messages To Delete");
 
-			//Prank On Gauge To Make Him Think He is Wiping Chat When He Isn't
-		} else {
-			console.log("korintariko")
-			var messageArea = document.getElementById("messagearea")
-			newMessageArea == "";
-			messageArea.innerHTML = "";
-			messageAreaArray.length = 0;
-			lastMessageNumber = messageNumber;
-			generateBoard(true);
-		}
-	} else {
-		console.log("Incorrect Answer: " + answer);
+            //Prank On Gauge To Make Him Think He is Wiping Chat When He Isn't
+        } else {
+            console.log("korintariko")
+            var messageArea = document.getElementById("messagearea")
+            newMessageArea == "";
+            messageArea.innerHTML = "";
+            messageAreaArray.length = 0;
+            lastMessageNumber = messageNumber;
+            generateBoard(true);
+        }
+    } else {
+        console.log("Incorrect Answer: " + answer);
 
-	}
-}
-
-
-var resizeSize = 0;
-var main = document.getElementById("main");
-
-function ResizeChat() {
-	console.log(resizeSize);
-	console.log(main);
-	if (resizeSize == 0) {
-		resizeSize++;
-		main.style.width = "1200px";
-	} else if (resizeSize == 1) {
-		resizeSize++;
-		main.style.height = "800px";
-	} else if (resizeSize == 2) {
-		resizeSize = 0;
-		main.style.width = "400px";
-		main.style.height = "600px";
-	}
+    }
 }
 
 function checkCommand(command) {
-	if (admin) {
-		command = command.slice(2);
-		var commandArray = [];
 
-		//Fix Hitting Enter Preventing Commands
-		while (command.includes("\n")) {
-			command = command.replace("\n", "");
-		}
+    command = command.slice(2);
+    var commandArray = [];
 
-
-		if (command.includes(" ")) {
-			commandArray = command.split(" ");
-		} else {
-			commandArray[0] = command;
-		}
-
-		//If Command Is Theme
-		if (commandArray[0] == "theme") {
-			console.log(parseInt(command.slice(6, 7)))
-			if (parseInt(command.slice(6, 7)) != NaN) {
-				ThemeStorage(command.slice(6, 7))
-			} else {
-				alert("Not A Number")
-			}
-
-			//Command To Delete Messages Individually
-		} else if (commandArray[0].toLowerCase() == "delete") {
-			console.log(parseInt(command.slice(7)));
-			var elmnt = document.getElementsByClassName("mn" + command.slice(7))[0];
-			trashElmnt = elmnt.children[3];
-			document.getElementById("input").value = "";
-			DeleteMessage(trashElmnt);
+    //Fix Hitting Enter Preventing Commands
+    while (command.includes("\n")) {
+        command = command.replace("\n", "");
+    }
 
 
-			//Command To Delete Messages By Username
-		} else if (commandArray[0].toLowerCase() == "deletebyuser") {
-			if (commandArray[1] != "" && commandArray[1] != undefined && commandArray[1] != null) {
-				alert("Deleting All Messages By The User " + commandArray[1])
-				document.getElementById("input").value = "";
-				for (x = 0; x < document.getElementsByClassName("name").length; x++) {
-					var elmntName = document.getElementsByClassName("name")[x];
-					var elmnt = elmntName.parentElement;
-					if (elmntName.innerHTML.toLowerCase() == commandArray[1].toLowerCase()) {
-						console.log("deleting")
-						DeleteMessage(elmnt.children[3]);
-					}
-				}
-			} else {
-				alert("You Must Include The Username For You To Delete Its Messages")
-			}
+    if (command.includes(" ")) {
+        commandArray = command.split(" ");
+    } else {
+        commandArray[0] = command;
+    }
 
-
-			//Block Array Command To Add or Remove Blocking List for People Locally
-		} else if (commandArray[0].toLowerCase() == "block") {
-			if (commandArray[1] != "" && commandArray[1] != null && commandArray[1] != undefined) {
-				//if it is Add
-				if (commandArray[1].toLowerCase() == "add") {
-					if (commandArray[2] != "" && commandArray[2] != null && commandArray[2] != undefined) {
-						if (blockArray.includes(commandArray[2]) == false) {
-							blockArray.push(commandArray[2].toLowerCase());
-							alert(commandArray[2] + " is now blocked")
-						} else {
-							alert("You Have Already Blocked Them")
-						}
-					} else {
-						alert("You Must Have A Name In The Third Space For The Blockee")
-					}
-
-					//If it is Remove
-				} else if (commandArray[1].toLowerCase() == "remove") {
-					if (blockArray.length == 0 || blockArray == undefined || blockArray == "" || blockArray == null) {
-						alert("Block Array is Currently Empty. Do '//block add (username)' to block someone")
-					} else {
-						if (commandArray[2] != "" && commandArray[2] != null && commandArray[2] != undefined) {
-							if (blockArray.includes(commandArray[2].toLowerCase())) {
-								function testExist(val) {
-									if (val != commandArray[2]) {
-										console.log("val: " + val + " commandarray[2]: " + commandArray[2])
-										return true;
-									} else {
-										return false;
-									}
-								}
-								console.log(blockArray + " 1");
-								blockArray = blockArray.filter(testExist);
-								console.log(blockArray);
-								alert("Successfully unblocked " + commandArray[2]);
-							} else {
-								alert("User Is Not Blocked");
-							}
-						} else {
-							alert("You Must Enter A Username To Unblock");
-						}
-					}
-
-					//If it is Read
-				} else if (commandArray[1].toLowerCase() == "read") {
-					if (blockArray.length == 0 || blockArray == undefined || blockArray == "" || blockArray == null) {
-						alert("Block Array is Currently Empty. Do '//block add (username)' to block someone")
-					} else {
-						alert("Blocked: " + blockArray);
-					}
-				} else {
-					alert("The Second Input Must Be 'add', 'remove' or 'read'");
-				}
-			} else {
-				alert("You Must Have A Second Input, 'add', 'remove', or 'read'");
-			}
+    //Theme Command
+    if (commandArray[0] == "theme") {
+        console.log(parseInt(command.slice(6, 7)))
+        if (parseInt(command.slice(6, 7)) != NaN) {
+            ThemeStorage(command.slice(6, 7))
+        } else {
+            CallAlertBox("Command Error", "Not A Number")
+        }
 
 
 
+        //Command To Delete Messages Individually
+    } else if (commandArray[0].toLowerCase() == "delete") {
+        if (admin == true) {
+            if (commandArray[1] != null && commandArray[1] != undefined && commandArray[1] != "") {
+                var elmnt = document.getElementsByClassName("mn" + commandArray[1]);
+                trashElmnt = elmnt.children[3];
+                document.getElementById("input").value = "";
+                DeleteMessage(trashElmnt);
+            } else {
+                CallAlertBox("Command Error", "You Need To Specify Message Number '//delete (Message number)'")
+            }
+        } else {
+            CallAlertBox("Command Error", "You Do Not Have Permission To Use This Command")
+        }
+
+
+
+        //Command To Delete Messages By Username
+    } else if (commandArray[0].toLowerCase() == "deletebyuser") {
+        if (admin == true) {
+            if (commandArray[1] != "" && commandArray[1] != undefined && commandArray[1] != null) {
+                CallAlertBox("Notice", "Deleting All Messages By The User " + commandArray[1])
+                document.getElementById("input").value = "";
+                for (x = 0; x < document.getElementsByClassName("name").length; x++) {
+                    var elmntName = document.getElementsByClassName("name")[x];
+                    var elmnt = elmntName.parentElement;
+                    if (elmntName.innerHTML.toLowerCase() == commandArray[1].toLowerCase()) {
+                        console.log("deleting")
+                        DeleteMessage(elmnt.children[3]);
+                    }
+                }
+            } else {
+                CallAlertBox("Command Error", "You Must Include The Username For You To Delete Its Messages")
+            }
+        } else {
+            CallAlertBox("Command Error", "You Do Not Have Permission To Use This Command")
+        }
+        //Command Help Page
+    } else if (commandArray[0] == "help") {
+        if (admin) {
+            CallAlertBox("Help Menu", '"//delete (Message Number)" - Deletes Message By Its Number\n"//deleteByUser (Username)" - Deletes All Messages By A User\n"//block {add/remove} (username)" - Adds Or Removes User From Your Local Blocked List\n"//block read" - Reads The Blocklist\n"//help" - Shows Commands And Function\n"//speak" - Enables/Disables Message Reading', true);
+        } else {
+            CallAlertBox("Help Menu", '"//block {add/remove} (username)" - Adds Or Removes User From Your Local Blocked List\n"//block read" - Reads The Blocklist\n"//help" - Shows Commands And Function\n"//speak" - Enables/Disables Message Reading', true);
+        }
+
+
+
+        //Command For Speach
+    } else if (commandArray[0] == "speak") {
+        if (readMessagesAllowed == false) {
+            var speech = "Speech Reading Enabled"
+            // list of languages is probably not loaded, wait for it
+            if (window.speechSynthesis.getVoices().length == 0) {
+                window.speechSynthesis.addEventListener('voiceschanged', function () {
+                    textToSpeech(speech);
+                });
+            } else {
+                // languages list available, no need to wait
+                textToSpeech(speech)
+            }
+            input.value = "";
+            readMessagesAllowed = true;
+        } else {
+            window.speechSynthesis.cancel();
+            console.log("Speaking Off")
+            textToSpeech("Speech Reading Disabled")
+            readMessagesAllowed = false;
+            input.value = "";
+        }
+
+        //If Command Doesnt Exist
+    } else {
+        CallAlertBox("Command Error", "Command Is Undefined: " + commandArray[0]);
+        console.log(command);
+        console.log(commandArray[0]);
+    }
+
+}
+
+
+function CopyChatlog() {
+    var string = "";
+    for (i = 0; i < messageAreaArray.length; i++) {
+        if (messageAreaArray[i] != undefined) {
+            var currentString = messageAreaArray[i]
+
+            //Get User Name
+            var indexNum = currentString.indexOf("<div class='name'>");
+            currentString = currentString.slice(indexNum + 18);
+            indexNum = currentString.indexOf("</div>");
+            var name = currentString.slice(0, indexNum);
+
+
+            //Get Post
+            indexNum = currentString.indexOf("<p class='text'>");
+            currentString = currentString.slice(indexNum + 16);
+            indexNum = currentString.indexOf("</p><p class='time'>")
+            var post = currentString.slice(0, indexNum)
 
 
 
 
 
+            string += name + ":\n" + post + "\n"
 
-		} else {
-			alert("Command Is Undefined: " + commandArray[0])
-			console.log(command);
-			console.log(commandArray[0]);
-		}
+        }
+    }
+    console.log(string)
+    outputChat = document.getElementById("outputchatlogbox");
+    outputChat.innerHTML = string;
+    outputChat.select();
+    outputChat.setSelectionRange(0, 99999); /*For mobile devices*/
+    CallAlertBox("Notice","Text Copied")
 
-	} else {
-		alert("You Do Not Have Admin Access To Send Commands");
-	}
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
 }

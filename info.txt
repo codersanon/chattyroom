@@ -8,19 +8,18 @@ Contributors
 
 Todo Goals
 	..Function Todo..
-    Add Deleting Individual Messages (Admin Can Delete Everyones)
-    Refresh Messages For The Deleted Messages
-	Add The Ability To Delete Your Own Messages
     Add The Ability To Have Separate Rooms Or Channels
     Perhaps Allowing Creating New Rooms In The App For The Admin
-    Add In Remote Updates(Push Out Updates Automatically)
+    Add In Remote Updates(Push Out Updates)
+    Click On Username In A Message to See Information
+    Allow Blocking And Unblocking From Said Information
     
     
 	..Design Todo..
 	get an ico for tab
 	Make Site Responsive
 	
-	
+    
 	..Advanced Todo..
 	Add In Authentication
 	Add Profile Pictures
@@ -31,22 +30,32 @@ Todo Goals
     secure the database using them
 	Use Firebase Rules To Prevent Javascript From Being inserted Into Messages (<script> tags)
 	Use Firebase Transactions To Delete All Messages At The Same Time
-    Database Should Auto Reorganize Messages (If Their Is No Number 10 Message but their are messages below and above it will shift all messages above number 10 down 1 and fix total messages number.)
     
     
     ..Analytics Todo..
     Figure Out How I Want To Track A Login List Of People
     Figure Out Way To Limit Messages And Still Be Able To Load More
-	Investigate Whether Non-Existant Messages Take Up The 50 Message Limit On Initial Loadup. (Do The Empty IDs Take Up the Place Of Messages?)
-	Investigate Whether Failing To Find A Document in The Database Still Counts As A Read (Unlikely)
+    
 	
 	..Bugfixing Todo..
-    Fix the page not Loading Your Message After You Send it until someone else sends one. (refresh every 2 seconds?)
-	Fix Sometimes Downloading a Message Twice
-	Fix Hitting Enter Starts New Line Before Sending Message (This Accidentally Splits Messages Up If Cursor Is Between Words And Allows People To Send Blanks)
-	Fix Whenever A Message Is Added Or Deleted The Deleted Message Boxes Reappear And Then Dissappear Again.
+	Fix Hitting Enter Starts New Line Before Sending Message (This Accidentally Splits Messages Up If Cursor Is Between Words)
+    Chatty Click Makes Pull Down Bar Inaccessable
+
 
 Development Updates
+
+    11/13/19
+        Improved Design (Removed Buttons And Created Pull Down Bar)
+    
+
+    11/7/19
+        Chatty Clicker Background Images Now Sometimes Pull From Chatty Room
+        Added A Full Trump Theme
+        Added Censorship
+        Added Commands For Deleting Messages Or Blocking Users
+        Added Text-To-Speech Command 
+        
+    
 	10/1/19
 		Added The Ability To Delete Messages You Wrote Or Any Indivually If You Are An Admin
 		Fixed A Glitch Were If A Message Was Missing In Database No Messages Would Load
